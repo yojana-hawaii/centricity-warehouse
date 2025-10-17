@@ -94,13 +94,28 @@ print('Message: 23 cps_all created')
 
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
+:r $(path_main)\dbo.ssis_job_cps_visit.sql
+:r $(path_main)\dbo.ssis_job_cps_orders.sql
+:r $(path_main)\dbo.ssis_job_cps_setup.sql
 print('Message: jobs created')
+
+
 
 /*run ssis*/
 go
 exec cpswarehouse.dbo.ssis_job_cps_all
 print('Message: cps_all ssis complete')
 go
+exec cpswarehouse.dbo.ssis_job_cps_visit
+print('Message: cps_visit ssis complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_orders
+print('Message: cps_orders ssis complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_setup
+print('Message: cps_setup ssis complete')
+
+
 
 
 print('Message: Schema End')
