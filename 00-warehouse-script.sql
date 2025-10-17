@@ -28,9 +28,7 @@ GO
 :r $(path_main)\01_create_database.sql
 :r $(path_main)\02_create_schema.sql
 :r $(path_main)\dbo.dimDates.sql
-exec cpswarehouse.dbo.ssis_dimDate
--- no stored proc
---:r $(path_main)\dbo.Numbers.sql
+:r $(path_main)\dbo.Numbers.sql
 print('Message: Database Created, schema added, dates and number dimension added')
 
 /*functions > 2 + 6 + 3 + 5 + 2 = 18*/
@@ -59,10 +57,52 @@ print('Message: Database Created, schema added, dates and number dimension added
 :r $(path_main)\fxn.StripMultipleSpaces.sql
 print('Message: 18 functions created')
 
+/*cps all > 3 + 4 + 4 + 1 + 2 + 9 = 23*/
+--before temp views
+:r $(path_main)\cps_all.ssis_Location.sql
+:r $(path_main)\cps_all.ssis_Location-x.sql
+:r $(path_main)\cps_all.ssis_DoctorFacility.sql
+-- before patient Profile
+:r $(path_main)\cps_all.tmp_view_PatientProvider.sql
+:r $(path_main)\cps_all.tmp_view_PatientEthnicity.sql
+:r $(path_main)\cps_all.tmp_view_PatientEducation.sql
+:r $(path_main)\cps_all.tmp_view_PatientCountry.sql
+--SSIS
+:r $(path_main)\cps_all.ssis_PatientProfile.sql
+:r $(path_main)\cps_all.ssis_PatientRace.sql
+:r $(path_main)\cps_all.ssis_InsuranceCarriers.sql
+:r $(path_main)\cps_all.ssis_PatientInsurance.sql
+
+:r $(path_main)\cps_all.view_DoctorFacility_Active_30days.sql
+
+:r $(path_main)\cps_all.rpt_view_ActiveProviders.sql
+:r $(path_main)\cps_all.rpt_view_major_Insurances.sql
+
+:r $(path_main)\cps_all.rpt_active_facility.sql
+:r $(path_main)\cps_all.rpt_active_insurance.sql
+:r $(path_main)\cps_all.rpt_ActiveProviders.sql
+:r $(path_main)\cps_all.rpt_doctorfacility.sql
+:r $(path_main)\cps_all.rpt_facility.sql
+:r $(path_main)\cps_all.rpt_identify_patient_insurance.sql
+:r $(path_main)\cps_all.rpt_identify_patient_with_InsuranceID.sql
+:r $(path_main)\cps_all.rpt_InsuranceCarrier_Classify.sql
+:r $(path_main)\cps_all.rpt_quest_patient_income.sql
+
+print('Message: 23 cps_all created')
 
 
 
+/*ssis job*/
+:r $(path_main)\dbo.ssis_job_cps_all.sql
+print('Message: jobs created')
+
+/*run ssis*/
 go
+exec cpswarehouse.dbo.ssis_job_cps_all
+print('Message: cps_all ssis complete')
+go
+
+
 print('Message: Schema End')
 go
 
