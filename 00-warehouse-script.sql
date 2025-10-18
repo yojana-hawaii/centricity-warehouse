@@ -154,10 +154,17 @@ print('Message: 27 cps-orders created')
 :r $(path_main)\cps_setup.rpt_User_Favorite_Form.sql
 print('Message: 6 cps-setup created')
 
-/*hl7*/
+/*hl7 > 2 + 4 = 6*/
 :r $(path_main)\cps_hl7.tmp_view_HL7_External_Source.sql
 :r $(path_main)\cps_hl7.ssis_all_HL7_Mapping.sql
-print('Message: 2 cps-hl7 created')
+
+:r $(path_main)\cps_hl7.view_CLH_Mapping.sql
+:r $(path_main)\cps_hl7.view_DLS_Mapping.sql
+:r $(path_main)\cps_hl7.view_DocMan_Mapping.sql
+:r $(path_main)\cps_hl7.view_HDRS_Mapping.sql
+
+
+print('Message: 6 cps-hl7 created')
 
 
 
