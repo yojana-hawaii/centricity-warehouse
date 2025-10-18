@@ -209,6 +209,65 @@ print('Message: 4 cps_meds created')
 print('Message: 1 cps_diag created')
 
 
+/*cps-imm> 4 + 2 + 1 + 9 + 1= 17**/
+:r $(path_main)\cps_imm.ssis_ImmunizationSetup.sql
+:r $(path_main)\cps_imm.ssis_ImmunizationGiven.sql
+:r $(path_main)\cps_imm.ssis_ImmunizationWithCombo.sql
+:r $(path_main)\cps_imm.ssis_Immunization_Combo.sql
+
+:r $(path_main)\cps_imm.ssis_SrxCurrentInventory.sql
+:r $(path_main)\cps_imm.ssis_SrxDuplicateInventory.sql
+
+:r $(path_main)\cps_imm.view_FullyVaccineStatus.sql
+
+:r $(path_main)\cps_imm.rpt_ImmunizationSetup.sql
+:r $(path_main)\cps_imm.rpt_VaccineDoseTracker.sql
+:r $(path_main)\cps_imm.rpt_DistinctVaccineGroup.sql
+:r $(path_main)\cps_imm.rpt_email_duplicate_in_srx.sql
+:r $(path_main)\cps_imm.rpt_ImmunizationAggByFacility.sql
+:r $(path_main)\cps_imm.rpt_ImmunizationAggByProvider.sql
+:r $(path_main)\cps_imm.rpt_Immunization_PositiveInventory.sql
+:r $(path_main)\cps_imm.rpt_Immunization_testPatient_Srx.sql
+:r $(path_main)\cps_imm.rpt_Immunization_ZeroInventory.sql
+
+:r $(path_main)\cps_imm.rpt_Immnization_CpsSrxQA.sql
+print('Message: 17 cps_imm  created')
+GO
+
+/*CC > 1 + 2 + 2 + 4 + 5 + 1 + 7 = 22*/
+:r $(path_main)\cps_cc.tmp_view_Protocol_PatientsList.sql
+
+:r $(path_main)\cps_cc.ssis_er_followup.sql
+:r $(path_main)\cps_cc.ssis_er_count.sql
+
+:r $(path_main)\cps_cc.ssis_Protocol_Age_Sex.sql
+:r $(path_main)\cps_cc.ssis_Protocol_Diabetes.sql
+
+:r $(path_main)\cps_cc.ssis_covid_tracking.sql
+:r $(path_main)\cps_cc.ssis_covid_supplyTracker.sql
+:r $(path_main)\cps_cc.ssis_Covid_Vaccine_Supplier.sql
+:r $(path_main)\cps_cc.ssis_covid_wellness_form.sql
+
+:r $(path_main)\cps_cc.ssis_CCCKD.sql
+:r $(path_main)\cps_cc.ssis_CCDiabetes.sql
+:r $(path_main)\cps_cc.ssis_cchabbits.sql
+:r $(path_main)\cps_cc.ssis_ccHTN.sql
+:r $(path_main)\cps_cc.ssis_ccSMG.sql
+
+:r $(path_main)\cps_cc.rpt_view_er_followup.sql
+
+:r $(path_main)\cps_cc.rpt_CovidSupplyTracker.sql
+:r $(path_main)\cps_cc.rpt_Covid_Tracking.sql
+:r $(path_main)\cps_cc.rpt_covid_vaccine.sql
+:r $(path_main)\cps_cc.rpt_erFollowup_Insurance_Monthly.sql
+:r $(path_main)\cps_cc.rpt_erFollowup_Insurance_Quarterly.sql
+:r $(path_main)\cps_cc.rpt_ER_Followup.sql
+:r $(path_main)\cps_cc.rpt_protocols.sql
+print('Message: 22 cps_cc Created')
+GO
+
+
+
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
 :r $(path_main)\dbo.ssis_job_cps_visit.sql
@@ -218,6 +277,8 @@ print('Message: 1 cps_diag created')
 :r $(path_main)\dbo.ssis_job_cps_obs.sql
 :r $(path_main)\dbo.ssis_job_cps_bh.sql
 :r $(path_main)\dbo.ssis_job_cps_meds_diag.sql
+:r $(path_main)\dbo.ssis_job_cps_imm.sql
+:r $(path_main)\dbo.ssis_job_cps_cc.sql
 print('Message: jobs created')
 
 
@@ -247,7 +308,12 @@ go
 exec cpswarehouse.dbo.ssis_job_cps_meds_diag
 print('Message: meds & diagnosis complete')
 go
-
+exec cpswarehouse.dbo.ssis_job_cps_imm
+print('Message: immunization complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_cc
+print('Message: care coord complete')
+go
 
 print('Message: Schema End')
 go
