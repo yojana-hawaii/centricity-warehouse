@@ -23,5 +23,18 @@ begin
 exec('create schema cps_setup authorization dbo')
 end
 go
+if not exists (select * from sys.schemas where name=N'cps_hl7') 
+begin
+exec('create schema cps_hl7 authorization dbo')
+end
+if not exists (select * from sys.schemas where name=N'cps_obs') 
+begin
+exec('create schema cps_obs authorization dbo')
+end
+if not exists (select * from sys.schemas where name=N'cps_bh') 
+begin
+exec('create schema cps_bh authorization dbo')
+end
+
 print('Message: Schema End')
 go

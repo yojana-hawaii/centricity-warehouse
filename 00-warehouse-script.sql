@@ -90,6 +90,111 @@ print('Message: 18 functions created')
 
 print('Message: 23 cps_all created')
 
+/*cps visit 1 + 6 + 1 + 5 = 13*/
+:r $(path_main)\cps_visits.tmp_view_ApptType.sql
+
+:r $(path_main)\cps_visits.ssis_Appointments.sql
+:r $(path_main)\cps_visits.ssis_ApptCycleTime.sql
+:r $(path_main)\cps_visits.ssis_ApptLog.sql
+:r $(path_main)\cps_visits.ssis_Document.sql
+:r $(path_main)\cps_visits.ssis_PatientVisitType.sql
+:r $(path_main)\cps_visits.ssis_PatientVisitType_join_Document.sql
+
+:r $(path_main)\cps_visits.rpt_view_ApptCycle.sql
+
+:r $(path_main)\cps_visits.rpt_PatientPanelPerProvider.sql
+:r $(path_main)\cps_visits.rpt_Productivity_by_Medicaid.sql
+:r $(path_main)\cps_visits.rpt_Productivity_Monthly_Ticket_Generated.sql
+:r $(path_main)\cps_visits.rpt_Productivity_Number_Issues.sql
+:r $(path_main)\cps_visits.rpt_random_Visit_per_provider.sql
+print('Message: 13 cps-visits created')
+
+/*orders > 5 + 3 + 6 + 13 = 27*/
+:r $(path_main)\cps_orders.ssis_OrderSpecialist.sql
+:r $(path_main)\cps_orders.ssis_OrderCodesAndCategories.sql
+:r $(path_main)\cps_orders.ssis_Fact_all_orders.sql
+:r $(path_main)\cps_orders.ssis_Referral_Setup_followup_scan.sql
+:r $(path_main)\cps_orders.ssis_email_future_orders.sql
+
+:r $(path_main)\cps_orders.view_External_Imaging_Orders.sql
+:r $(path_main)\cps_orders.view_External_Referral_Orders.sql
+:r $(path_main)\cps_orders.view_Internal_Referral_Orders.sql
+
+:r $(path_main)\cps_orders.rpt_view_EnablingCodes.sql
+:r $(path_main)\cps_orders.rpt_view_ExternalReferral.sql
+:r $(path_main)\cps_orders.rpt_view_InternalReferral_Appt.sql
+:r $(path_main)\cps_orders.rpt_view_LabResults.sql
+:r $(path_main)\cps_orders.rpt_view_Lab_Referral_Imaging.sql
+:r $(path_main)\cps_orders.rpt_view_Radiology.sql
+
+:r $(path_main)\cps_orders.rpt_EnablingCodeCount.sql
+:r $(path_main)\cps_orders.rpt_EnablingCodeCount_HCHP.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_All.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_Dashboard.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_Provider_Summary.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_Quarters.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_Team_Summary.sql
+:r $(path_main)\cps_orders.rpt_External_Referral_Tracking.sql
+:r $(path_main)\cps_orders.rpt_internal_referral_tracking.sql
+:r $(path_main)\cps_orders.rpt_LabResults.sql
+:r $(path_main)\cps_orders.rpt_Lab_Referral_Imaging.sql
+:r $(path_main)\cps_orders.rpt_OrderStatusSummary.sql
+:r $(path_main)\cps_orders.rpt_Radiology.sql
+print('Message: 27 cps-orders created')
+
+
+/*cps setup - 3 + 1 + 2 = 6*/
+:r $(path_main)\cps_setup.ssis_Encounters_DocumentTemplates.sql
+:r $(path_main)\cps_setup.ssis_Form_Components.sql
+:r $(path_main)\cps_setup.ssis_Text_Components.sql
+
+:r $(path_main)\cps_setup.view_cpt_prodecure_setup.sql
+
+:r $(path_main)\cps_setup.rpt_Encounters_DocumentTemplates.sql
+:r $(path_main)\cps_setup.rpt_User_Favorite_Form.sql
+print('Message: 6 cps-setup created')
+
+/*hl7*/
+:r $(path_main)\cps_hl7.tmp_view_HL7_External_Source.sql
+:r $(path_main)\cps_hl7.ssis_all_HL7_Mapping.sql
+print('Message: 2 cps-hl7 created')
+
+
+
+/*obs*/
+:r $(path_main)\cps_obs.ssis_obshead.sql
+:r $(path_main)\cps_obs.ssis_Aapcho.sql
+:r $(path_main)\cps_obs.ssis_Age_Sex_Protocol_obs.sql
+:r $(path_main)\cps_obs.ssis_Diabetes_Obs.sql
+:r $(path_main)\cps_obs.ssis_DirectMessaging_Sent.sql
+:r $(path_main)\cps_obs.ssis_ExternalLabsResults.sql
+:r $(path_main)\cps_obs.ssis_Flowsheet_Recussive.sql
+:r $(path_main)\cps_obs.ssis_LabsFlowsheet.sql
+:r $(path_main)\cps_obs.ssis_VitalSignFlowsheet.sql
+print('Message: 9 cps_obs created')
+GO
+
+/*cps bh > 1 + 5 + 2 + 8 = 16*/
+:r $(path_main)\cps_bh.tmp_view_BH_Appointments.sql
+
+:r $(path_main)\cps_bh.ssis_BH_Patient.sql
+:r $(path_main)\cps_bh.ssis_BH_Metric_All.sql
+:r $(path_main)\cps_bh.ssis_BH_SbirtCode.sql
+:r $(path_main)\cps_bh.ssis_BH_SbirtObs.sql
+:r $(path_main)\cps_bh.ssis_BH_phq_Gad.sql
+
+:r $(path_main)\cps_bh.rpt_view_BH_Gad_PhQ.sql
+:r $(path_main)\cps_bh.rpt_view_BHSbirt_Code_Obs.sql
+
+:r $(path_main)\cps_bh.rpt_BH_Gad_Phq_Changes.sql
+:r $(path_main)\cps_bh.rpt_BH_Gad_Phq_Count_By_Month.sql
+:r $(path_main)\cps_bh.rpt_BH_Gad_Phq_Details.sql
+:r $(path_main)\cps_bh.rpt_bh_gad_phq_Provider.sql
+:r $(path_main)\cps_bh.rpt_BH_PatientList.sql
+:r $(path_main)\cps_bh.rpt_BH_sbirt_count_by_month.sql
+:r $(path_main)\cps_bh.rpt_BH_sbirt_details.sql
+:r $(path_main)\cps_bh.rpt_BH_sbirt_provider.sql
+print('Message: 16 cps_bh created')
 
 
 /*ssis job*/
@@ -97,6 +202,9 @@ print('Message: 23 cps_all created')
 :r $(path_main)\dbo.ssis_job_cps_visit.sql
 :r $(path_main)\dbo.ssis_job_cps_orders.sql
 :r $(path_main)\dbo.ssis_job_cps_setup.sql
+:r $(path_main)\dbo.ssis_job_cps_hl7.sql
+:r $(path_main)\dbo.ssis_job_cps_obs.sql
+:r $(path_main)\dbo.ssis_job_cps_bh.sql
 print('Message: jobs created')
 
 
@@ -114,7 +222,16 @@ print('Message: cps_orders ssis complete')
 go
 exec cpswarehouse.dbo.ssis_job_cps_setup
 print('Message: cps_setup ssis complete')
-
+go
+exec cpswarehouse.dbo.ssis_job_cps_hl7
+print('Message: cps_hl7 ssis complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_obs
+print('Message: cps_obs ssis complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_bh
+print('Message: cps_bh ssis complete')
+go
 
 
 
