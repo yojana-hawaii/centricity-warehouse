@@ -196,6 +196,18 @@ GO
 :r $(path_main)\cps_bh.rpt_BH_sbirt_provider.sql
 print('Message: 16 cps_bh created')
 
+/*meds*/
+:r $(path_main)\cps_meds.ssis_PatientMedication.sql
+
+:r $(path_main)\cps_meds.view_ActivePharmacy.sql
+:r $(path_main)\cps_meds.ssis_PatientMedication.sql
+:r $(path_main)\cps_meds.rpt_Walgreens_340B.sql
+print('Message: 4 cps_meds created')
+
+/*diag*/
+:r $(path_main)\cps_diag.ssis_Problem_First_Last_Assessment.sql
+print('Message: 1 cps_diag created')
+
 
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
@@ -205,8 +217,8 @@ print('Message: 16 cps_bh created')
 :r $(path_main)\dbo.ssis_job_cps_hl7.sql
 :r $(path_main)\dbo.ssis_job_cps_obs.sql
 :r $(path_main)\dbo.ssis_job_cps_bh.sql
+:r $(path_main)\dbo.ssis_job_cps_meds_diag.sql
 print('Message: jobs created')
-
 
 
 /*run ssis*/
@@ -232,7 +244,9 @@ go
 exec cpswarehouse.dbo.ssis_job_cps_bh
 print('Message: cps_bh ssis complete')
 go
-
+exec cpswarehouse.dbo.ssis_job_cps_meds_diag
+print('Message: meds & diagnosis complete')
+go
 
 
 print('Message: Schema End')
