@@ -168,6 +168,3 @@ begin
 	--order by VaccineGroup_cps, NDC_CPS, LotNumber_Cps, Matching
 end
 go
-exec cps_imm.rpt_Immnization_CpsSrxQA @startdate = '1-01-2022', @enddate = '12-21-2022'
-
-go

@@ -22,3 +22,5 @@ begin
 	where series1date > @5year  and VaccineGroup = @VaccineGroup
 
 end
+
+go

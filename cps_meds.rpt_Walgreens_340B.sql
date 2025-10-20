@@ -45,6 +45,3 @@ where convert(date,m.ClinicalDate) >= @StartDate
 end
 
 go
-
-exec CpsWarehouse.cps_meds.rpt_Walgreens_340B '2022-01-01','2023-01-15';
-go

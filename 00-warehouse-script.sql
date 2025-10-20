@@ -207,7 +207,6 @@ print('Message: 16 cps_bh created')
 :r $(path_main)\cps_meds.ssis_PatientMedication.sql
 
 :r $(path_main)\cps_meds.view_ActivePharmacy.sql
-:r $(path_main)\cps_meds.ssis_PatientMedication.sql
 :r $(path_main)\cps_meds.rpt_Walgreens_340B.sql
 print('Message: 4 cps_meds created')
 
