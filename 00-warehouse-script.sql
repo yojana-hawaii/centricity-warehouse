@@ -220,22 +220,22 @@ print('Message: 1 cps_diag created')
 :r $(path_main)\cps_imm.ssis_ImmunizationWithCombo.sql
 :r $(path_main)\cps_imm.ssis_Immunization_Combo.sql
 
-:r $(path_main)\cps_imm.ssis_SrxCurrentInventory.sql
-:r $(path_main)\cps_imm.ssis_SrxDuplicateInventory.sql
+--:r $(path_main)\cps_imm.ssis_SrxCurrentInventory.sql
+--:r $(path_main)\cps_imm.ssis_SrxDuplicateInventory.sql
 
 :r $(path_main)\cps_imm.view_FullyVaccineStatus.sql
 
 :r $(path_main)\cps_imm.rpt_ImmunizationSetup.sql
 :r $(path_main)\cps_imm.rpt_VaccineDoseTracker.sql
 :r $(path_main)\cps_imm.rpt_DistinctVaccineGroup.sql
-:r $(path_main)\cps_imm.rpt_email_duplicate_in_srx.sql
 :r $(path_main)\cps_imm.rpt_ImmunizationAggByFacility.sql
 :r $(path_main)\cps_imm.rpt_ImmunizationAggByProvider.sql
-:r $(path_main)\cps_imm.rpt_Immunization_PositiveInventory.sql
-:r $(path_main)\cps_imm.rpt_Immunization_testPatient_Srx.sql
-:r $(path_main)\cps_imm.rpt_Immunization_ZeroInventory.sql
+--:r $(path_main)\cps_imm.rpt_email_duplicate_in_srx.sql
+--:r $(path_main)\cps_imm.rpt_Immunization_PositiveInventory.sql
+--:r $(path_main)\cps_imm.rpt_Immunization_testPatient_Srx.sql
+--:r $(path_main)\cps_imm.rpt_Immunization_ZeroInventory.sql
 
-:r $(path_main)\cps_imm.rpt_Immnization_CpsSrxQA.sql
+--:r $(path_main)\cps_imm.rpt_Immnization_CpsSrxQA.sql
 print('Message: 17 cps_imm  created')
 GO
 
@@ -317,8 +317,8 @@ print('Message: 30 cps_hchp Created')
 GO
 
 /*opt > 2*/
-:r $(path_main)\cps_opt.ssis_GlassPrescription
-:r $(path_main)\cps_opt.ssis_ContactPrescription
+:r $(path_main)\cps_opt.ssis_GlassPrescription.sql
+:r $(path_main)\cps_opt.ssis_ContactPrescription.sql
 print('Message: 2 cps_opt Created')
 
 /*doh > 1 + 3 + 1 + 2 + 5 = 12*/
@@ -330,8 +330,8 @@ print('Message: 2 cps_opt Created')
 
 :r $(path_main)\cps_doh.view_CVR_Verify_Data.sql
 
-:r $(path_main)\cps_doh.rpt_view_CVR_VisitFile.sql
 :r $(path_main)\cps_doh.rpt_view_FindCVRPatients.sql
+:r $(path_main)\cps_doh.rpt_view_CVR_VisitFile.sql
 
 :r $(path_main)\cps_doh.rpt_cvr_accounting_summary.sql
 :r $(path_main)\cps_doh.rpt_cvr_accouting.sql

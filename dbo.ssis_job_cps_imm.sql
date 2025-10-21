@@ -11,7 +11,7 @@ as begin
 	exec CpsWarehouse.cps_imm.ssis_ImmunizationWithCombo;
 	exec CpsWarehouse.cps_imm.ssis_Immunization_Combo;
 
-	exec CpsWarehouse.cps_imm.ssis_SrxCurrentInventory;
-	exec CpsWarehouse.cps_imm.ssis_SrxDuplicateInventory;
+	--exec CpsWarehouse.cps_imm.ssis_SrxCurrentInventory;
+	--exec CpsWarehouse.cps_imm.ssis_SrxDuplicateInventory;
 end
 go
