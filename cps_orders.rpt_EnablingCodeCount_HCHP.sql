@@ -62,5 +62,4 @@ where
 	and o.OrderDate <= @EndDate
 
 end
-
 go

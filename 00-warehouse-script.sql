@@ -1,12 +1,6 @@
 
 USE master
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_WARNINGS ON
-GO
 
 /*
 
@@ -20,6 +14,7 @@ Turn on sqlCmd Mode --> Query --> sqlCmd Mode
 */
 
 /******************dbo path******************/
+print('start')
 :setvar path_main c:\CpsWarehouse
 
 
@@ -109,7 +104,7 @@ print('Message: 23 cps_all created')
 :r $(path_main)\cps_visits.rpt_random_Visit_per_provider.sql
 print('Message: 13 cps-visits created')
 
-/*orders > 5 + 3 + 6 + 13 = 27*/
+/*orders > 5 + 3 + 6 + 2 + 7 + 5 = 28*/
 :r $(path_main)\cps_orders.ssis_OrderSpecialist.sql
 :r $(path_main)\cps_orders.ssis_OrderCodesAndCategories.sql
 :r $(path_main)\cps_orders.ssis_Fact_all_orders.sql
@@ -129,6 +124,7 @@ print('Message: 13 cps-visits created')
 
 :r $(path_main)\cps_orders.rpt_EnablingCodeCount.sql
 :r $(path_main)\cps_orders.rpt_EnablingCodeCount_HCHP.sql
+
 :r $(path_main)\cps_orders.rpt_External_Referral_All.sql
 :r $(path_main)\cps_orders.rpt_External_Referral_Dashboard.sql
 :r $(path_main)\cps_orders.rpt_External_Referral_Provider_Summary.sql
@@ -136,11 +132,14 @@ print('Message: 13 cps-visits created')
 :r $(path_main)\cps_orders.rpt_External_Referral_Team_Summary.sql
 :r $(path_main)\cps_orders.rpt_External_Referral_Tracking.sql
 :r $(path_main)\cps_orders.rpt_internal_referral_tracking.sql
+
 :r $(path_main)\cps_orders.rpt_LabResults.sql
 :r $(path_main)\cps_orders.rpt_Lab_Referral_Imaging.sql
 :r $(path_main)\cps_orders.rpt_OrderStatusSummary.sql
 :r $(path_main)\cps_orders.rpt_Radiology.sql
-print('Message: 27 cps-orders created')
+:r $(path_main)\cps_orders.rpt_EnablingCodeCount_HCHP.sql
+
+print('Message: 28 cps-orders created')
 
 
 /*cps setup - 3 + 1 + 2 = 6*/
@@ -272,7 +271,50 @@ GO
 print('Message: 22 cps_cc Created')
 GO
 
+/*cps_hchp > 1 + 3 + 2 + 5 + 2 + 5 + 5 + 5 + 4 = 32*/
+:r $(path_main)\cps_hchp.tmp_view_HCHPClients.sql
 
+:r $(path_main)\cps_hchp.ssis_HCHP_Dashboard.sql
+:r $(path_main)\cps_hchp.ssis_HCHP_LastClientStatus.sql
+:r $(path_main)\cps_hchp.ssis_HCHP_Patient_Appointments.sql
+
+:r $(path_main)\cps_hchp.ssis_CBCMMetricDueNow.sql
+:r $(path_main)\cps_hchp.ssis_CBCM_AcuityScore.sql
+
+:r $(path_main)\cps_hchp.rpt_view_hchpDemographics.sql
+:r $(path_main)\cps_hchp.rpt_view_CBCMClients.sql
+:r $(path_main)\cps_hchp.rpt_view_HFClients.sql
+:r $(path_main)\cps_hchp.rpt_view_OutreachClients.sql
+:r $(path_main)\cps_hchp.rpt_view_PSHClients.sql
+
+:r $(path_main)\cps_hchp.ssis_CBCM_metric.sql
+:r $(path_main)\cps_hchp.ssis_Care_Plan_Management.sql
+
+:r $(path_main)\cps_hchp.rpt_CaseLoad_CBCM.sql
+:r $(path_main)\cps_hchp.rpt_CaseLoad_HFCM.sql
+:r $(path_main)\cps_hchp.rpt_CaseLoad_HFSpecialist.sql
+:r $(path_main)\cps_hchp.rpt_CaseLoad_Outreach.sql
+:r $(path_main)\cps_hchp.rpt_CaseLoad_PSH.sql
+
+:r $(path_main)\cps_hchp.rpt_EncounterDetails_CBCM.sql
+:r $(path_main)\cps_hchp.rpt_EncounterDetails_HFCM.sql
+:r $(path_main)\cps_hchp.rpt_EncounterDetails_HFSpecialist.sql
+:r $(path_main)\cps_hchp.rpt_EncounterDetails_Outreach.sql
+:r $(path_main)\cps_hchp.rpt_EncounterDetails_PSH.sql
+
+:r $(path_main)\cps_hchp.rpt_Timeliness_CBCM.sql
+:r $(path_main)\cps_hchp.rpt_Timeliness_HFCM.sql
+:r $(path_main)\cps_hchp.rpt_Timeliness_HFSpecialist.sql
+:r $(path_main)\cps_hchp.rpt_Timeliness_Outreach.sql
+:r $(path_main)\cps_hchp.rpt_Timeliness_PSH.sql
+
+:r $(path_main)\cps_hchp.rpt_AcuityReport.sql
+:r $(path_main)\cps_hchp.rpt_HCHPRoster.sql
+:r $(path_main)\cps_hchp.rpt_CaseManagerList.sql
+:r $(path_main)\cps_hchp.rpt_CBCMLastDates.sql
+
+print('Message: 30 cps_hchp Created')
+GO
 
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
@@ -285,6 +327,7 @@ GO
 :r $(path_main)\dbo.ssis_job_cps_meds_diag.sql
 :r $(path_main)\dbo.ssis_job_cps_imm.sql
 :r $(path_main)\dbo.ssis_job_cps_cc.sql
+:r $(path_main)\dbo.ssis_job_cps_hchp.sql
 print('Message: jobs created')
 
 
@@ -320,7 +363,9 @@ go
 exec cpswarehouse.dbo.ssis_job_cps_cc
 print('Message: care coord complete')
 go
-
+exec cpswarehouse.dbo.ssis_job_cps_hchp
+print('Message: hchp complete')
+go
 print('Message: Schema End')
 go
 

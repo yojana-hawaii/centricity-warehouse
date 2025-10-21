@@ -51,6 +51,10 @@ if not exists (select * from sys.schemas where name=N'cps_cc')
 begin
 exec('create schema cps_cc authorization dbo')
 end
+if not exists (select * from sys.schemas where name=N'cps_hchp') 
+begin
+exec('create schema cps_hchp authorization dbo')
+end
 
 print('Message: Schema End')
 go
