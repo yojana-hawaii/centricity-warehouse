@@ -85,7 +85,7 @@ IF OBJECT_ID('tempdb..#Final3') IS NOT NULL DROP TABLE #Final3;
 IF OBJECT_ID('tempdb..#Verify') IS NOT NULL DROP TABLE #Verify;
 
 
-/**Level 1 NameSpace - KPHC immunization,Immunization type (vaccine group)
+/**Level 1 NameSpace - Cps immunization,Immunization type (vaccine group)
 select * from #level1
 *********************************************************/
 drop table if exists #level1;
@@ -96,7 +96,7 @@ SELECT
 INTO #Level1
 FROM [cpssql].CentricityPS.DBO.ContentList
 --WHERE Namespace = 'ge.imm.cusl.1734341538050570'
-WHERE Namespace in (/*'GE.IMM.CUSL.1924155241631230'Covid-19 Custom List,*/'GE.IMM.CUSL.1734341538050570'/*1.KPHC Custom List*/)
+WHERE Namespace in (/*'GE.IMM.CUSL.1924155241631230'Covid-19 Custom List,*/'GE.IMM.CUSL.1734341538050570'/*1.Cps Custom List*/)
 ORDER BY ListOrder;
 
 

@@ -26,7 +26,7 @@ as
 		  ,[Last_housing_location]
 		  ,[Last_Housing_Program]
 		  ,[Last_Housing_Status]
-		  , Last_KPHC_Consent
+		  , Last_Cps_Consent
 		  ,Last_BHA_signed_by_Q
 		  ,Last_ITP_signed_by_Q
 		  ,Last_LOCUS_signed_by_Q

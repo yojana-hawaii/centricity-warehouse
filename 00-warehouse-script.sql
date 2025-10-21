@@ -271,7 +271,7 @@ GO
 print('Message: 22 cps_cc Created')
 GO
 
-/*cps_hchp > 1 + 3 + 2 + 5 + 2 + 5 + 5 + 5 + 4 = 32*/
+/*cps_hchp > 1 + 3 + 2 + 5 + 1 + 5 + 5 + 5 + 3 = 30*/
 :r $(path_main)\cps_hchp.tmp_view_HCHPClients.sql
 
 :r $(path_main)\cps_hchp.ssis_HCHP_Dashboard.sql
@@ -316,6 +316,31 @@ GO
 print('Message: 30 cps_hchp Created')
 GO
 
+/*opt > 2*/
+:r $(path_main)\cps_opt.ssis_GlassPrescription
+:r $(path_main)\cps_opt.ssis_ContactPrescription
+print('Message: 2 cps_opt Created')
+
+/*doh > 1 + 3 + 1 + 2 + 5 = 12*/
+:r $(path_main)\cps_doh.tmp_view_FindCVRPatients.sql
+
+:r $(path_main)\cps_doh.ssis_CVRClient.sql
+:r $(path_main)\cps_doh.ssis_CVRCLientObs.sql
+:r $(path_main)\cps_doh.ssis_CVRVisitClinicalList.sql
+
+:r $(path_main)\cps_doh.view_CVR_Verify_Data.sql
+
+:r $(path_main)\cps_doh.rpt_view_CVR_VisitFile.sql
+:r $(path_main)\cps_doh.rpt_view_FindCVRPatients.sql
+
+:r $(path_main)\cps_doh.rpt_cvr_accounting_summary.sql
+:r $(path_main)\cps_doh.rpt_cvr_accouting.sql
+:r $(path_main)\cps_doh.rpt_cvr_acct_revenue.sql
+:r $(path_main)\cps_doh.rpt_CVR_ClientFile.sql
+:r $(path_main)\cps_doh.rpt_CVR_VisitFile.sql
+print('Message: 12 cps_doh Created')
+
+
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
 :r $(path_main)\dbo.ssis_job_cps_visit.sql
@@ -328,6 +353,8 @@ GO
 :r $(path_main)\dbo.ssis_job_cps_imm.sql
 :r $(path_main)\dbo.ssis_job_cps_cc.sql
 :r $(path_main)\dbo.ssis_job_cps_hchp.sql
+:r $(path_main)\dbo.ssis_job_cps_opt.sql
+:r $(path_main)\dbo.ssis_job_cps_doh.sql
 print('Message: jobs created')
 
 
@@ -365,6 +392,12 @@ print('Message: care coord complete')
 go
 exec cpswarehouse.dbo.ssis_job_cps_hchp
 print('Message: hchp complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_opt
+print('Message: opt complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_doh
+print('Message: doh complete')
 go
 print('Message: Schema End')
 go

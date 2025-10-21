@@ -27,7 +27,7 @@ CREATE TABLE [cps_cc].[ER_Followup] (
     [Q2]                          VARCHAR (20)     NULL,
     [Q3]                          VARCHAR (5)      NULL,
     [Q4]                          VARCHAR (3)      NULL,
-    [Q4_Y_KPHC_to_ER]             SMALLINT         NULL,
+    [Q4_Y_Cps_to_ER]             SMALLINT         NULL,
     [Q4_Y_Phone_Busy]             SMALLINT         NULL,
     [Q4_Y_No_Answer]              SMALLINT         NULL,
     [Q4_Y_No_Call_Back]           SMALLINT         NULL,
@@ -60,7 +60,7 @@ CREATE TABLE [cps_cc].[ER_Followup] (
     [No_Appt_Other]               SMALLINT         NULL,
     [ApptScheduledinForm]         VARCHAR (50)     NULL,
     [ApptDateInForm]              DATE             NULL,
-    [KPHCSentToER]                INT              NULL,
+    [CpsSentToER]                INT              NULL,
     [ApptDateInCPS]               DATE             NULL,
     [ApptProv]                    VARCHAR (100)    NULL,
     [FutureApptDate]              DATE             NULL,
@@ -170,13 +170,13 @@ select
 	max(case  when hdid = 78599 then obsvalue  end) Q4,
 	max(case  when hdid = 166846 then obsvalue  end) Q5,	
 	max(case  when hdid = 568894 then obsvalue  end) erCount,
-	max(case  when hdid = 167206 then obsvalue  end) EducKPHCServices,
+	max(case  when hdid = 167206 then obsvalue  end) EducCpsServices,
 	max(case  when hdid = 200228 then obsvalue  end) ApptSch,
 	max(case  when hdid = 1000086 then obsvalue  end) DateAppt,
 	max(case  when hdid = 214274 then obsvalue  end) NoApptReason,
 	max(case  when hdid = 77027 then obsvalue  end) NoApptReason2,
 	max(case  when hdid = 211557 then obsvalue  end) ApptCareCoord,
-	max(case  when hdid = 574873 then obsvalue  end) KPHCSentToER,
+	max(case  when hdid = 574873 then obsvalue  end) CpsSentToER,
 	max(case  when hdid = 137288 then obsvalue  end) CallAttempt,
 	max(case  when hdid = 15500029 then obsvalue  end) Letter,
 	max(case  when hdid = 54797 then obsvalue  end) [Caller],
@@ -317,10 +317,10 @@ drop table if exists #obs_cleaned_up
 		admitDX,
 		Q1, Q2, Q3, Q4, Q5,
 		erCount,
-		EducKPHCServices,
+		EducCpsServices,
 		ApptSch,DateAppt, NoApptReason, NoApptReason2,
 		ApptCareCoord, Letter, DocSigned, 
-		KPHCSentToER, 
+		CpsSentToER, 
 		[Caller], 
 		case 
 		when CallAttempt = 'First Call' or CallAttempt = 'First Attempt' then 'First'
@@ -347,7 +347,7 @@ drop table if exists #obs_cleaned_up
 		ER_Name, Hospital_Name,admitDX,
 		Q1, Q2, Q3, Q4, Q5,
 		erCount,
-		EducKPHCServices as Education,
+		EducCpsServices as Education,
 		ApptSch,
 		convert(date,case
 			when isdate(DateAppt) = 1 or DateAppt is null then DateAppt 
@@ -360,7 +360,7 @@ drop table if exists #obs_cleaned_up
 			when NoApptReason2 is null then NoApptReason
 			else NoApptReason + ', ' + NoApptReason2
 		end NoApptReason,
-		ApptCareCoord, KPHCSentToER, CallAttempt, Letter, [Caller],
+		ApptCareCoord, CpsSentToER, CallAttempt, Letter, [Caller],
 	MoreThanOneERInDay, convert(int,TotalERInOneDay) TotalERInOneDay
 	into #obs_cleaned_up
 	from u
@@ -417,7 +417,7 @@ drop table if exists #hospital_scans;
 		convert(varchar(2000), null) Q4, convert(varchar(2000), null) Q5, 
 		convert(varchar(2000), null) erCount, convert(varchar(2000), null) Education, convert(varchar(2000), null) ApptSch, 
 		convert(date,null) DateAppt, convert(varchar(2000), null) NoApptReason,
-		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) KPHCSentToER, convert(varchar(2000), null) CallAttempt, 
+		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) CpsSentToER, convert(varchar(2000), null) CallAttempt, 
 		convert(varchar(2000), null) Letter, convert(varchar(2000), null) [Caller], 
 		convert(varchar(50), null) MoreThanOneER,
 		convert(int, null) TotalER
@@ -488,7 +488,7 @@ drop table if exists #ccda_import
 		convert(varchar(2000), null) Q4, convert(varchar(2000), null) Q5, 
 		convert(varchar(2000), null) erCount, convert(varchar(2000), null) Education, convert(varchar(2000), null) ApptSch, 
 		convert(date,null) DateAppt, convert(varchar(2000), null) NoApptReason,
-		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) KPHCSentToER, convert(varchar(2000), null) CallAttempt, 
+		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) CpsSentToER, convert(varchar(2000), null) CallAttempt, 
 		convert(varchar(2000), null) Letter, convert(varchar(2000), null) [Caller],
 		convert(varchar(50), null) MoreThanOneER,
 		convert(int, null) TotalER
@@ -549,7 +549,7 @@ drop table if exists #ER_Scans;
 		convert(varchar(2000), null) Q4, convert(varchar(2000), null) Q5, 
 		convert(varchar(2000), null) erCount, convert(varchar(2000), null) Education, convert(varchar(2000), null) ApptSch, 
 		convert(date,null) DateAppt, convert(varchar(2000), null) NoApptReason,
-		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) KPHCSentToER, convert(varchar(2000), null) CallAttempt, 
+		convert(varchar(2000), null) ApptCareCoord, convert(varchar(2000), null) CpsSentToER, convert(varchar(2000), null) CallAttempt, 
 		convert(varchar(2000), null) Letter, convert(varchar(2000), null) [Caller],
 		convert(varchar(50), null) MoreThanOneER,
 		convert(int, null) TotalER
@@ -589,7 +589,7 @@ select countAsFollowup,
 	end ER_Hosp_Name,
 	admitDX, Q1, Q2, Q3, Q4, Q5,
 	erCount, Education, ApptSch, DateAppt, NoApptReason, ApptCareCoord, 
-	KPHCSentToER, CallAttempt, Letter, Caller, MoreThanOneERInDay, TotalERInOneDay
+	CpsSentToER, CallAttempt, Letter, Caller, MoreThanOneERInDay, TotalERInOneDay
 
 into #allDocs
 from 
@@ -772,7 +772,7 @@ select d.countAsFollowup,
 	s.dischargeDate, 
 	dx.ER_Hosp_Name, dx.admitDX, Q1, Q2, Q3, Q4, Q5,
 	erCount, Education, ApptSch ApptScheduled, DateAppt ApptDateInForm, NoApptReason, ApptCareCoord, 
-	KPHCSentToER, CallAttempt, Letter, Caller, MoreThanOneERInDay, TotalERInOneDay
+	CpsSentToER, CallAttempt, Letter, Caller, MoreThanOneERInDay, TotalERInOneDay
 into #allDocs_withSummary
 from #allDocs d
 	left join #dateFromSummary s on d.pid = s.pid and d.sdid = s.SDID
@@ -1130,8 +1130,8 @@ with questions as
 		stand.newXSDID, summ.PID, summ.db_Create_Date,  
 		Q1 /*1. Were you admitted to the hospital? yes, no, NULL*/, 
 		Q2 /*2. How long did you stay in the hospital? < 2 days, more than 10 days, other, between 3-5 days, between 6-10 days, NULL*/, 
-		Q3 /*3. Are you aware that you can contact your doctor at KPHC when the office is closed? yes, no, NULL*/,
-		Q4 /*4. Did you contact KPHC before you went to ER? 25 different options*/, 
+		Q3 /*3. Are you aware that you can contact your doctor at Cps when the office is closed? yes, no, NULL*/,
+		Q4 /*4. Did you contact Cps before you went to ER? 25 different options*/, 
 		Q5 /*5. Were you referred to another facility? yes, no, NULL*/, 
 		Q_num = ROW_NUMBER() over(partition by stand.newXSDID order by summ.db_Create_Date)
 	from #allDocs_withSummary summ
@@ -1265,7 +1265,7 @@ with questions as
 		Q1, Q2, Q3, Q5, 
 		case when Q4 like 'No%' then 'No' when Q4 like 'yes%' then 'Yes' end Q4, 
 	
-	case when CHARINDEX('KPHC sent me to ER', Q4) > 0 then 1 end Q4_Y_KPHC_to_ER,
+	case when CHARINDEX('Cps sent me to ER', Q4) > 0 then 1 end Q4_Y_Cps_to_ER,
 	case when CHARINDEX('Phone busy', Q4) > 0 then 1 end Q4_Y_Phone_busy,
 	case when CHARINDEX('No answer', Q4) > 0 then 1 end Q4_Y_No_Answer,
 	case when CHARINDEX('Left message did', Q4) > 0 then 1 end Q4_Y_No_call_back,
@@ -1804,7 +1804,7 @@ declare
 	from pivot_no_appts
 
 /**************************#RestofFormData
-	Includes: documentation of appt scheduled, dat of appt in form, whether KPHC sent to ER
+	Includes: documentation of appt scheduled, dat of appt in form, whether Cps sent to ER
 	same as questions, education and noApptReason
 *************************************************/
 drop table if exists #RestofFormData
@@ -1812,7 +1812,7 @@ drop table if exists #RestofFormData
 	select 
 		stand.newXSDID, summ.PID, summ.db_Create_Date,
 		ApptScheduled, ApptDateInForm,  
-		case when KPHCSentToER = 'KPHC sent to ER' then 1 end KPHCSentToER, 
+		case when CpsSentToER = 'Cps sent to ER' then 1 end CpsSentToER, 
 		R_num = ROW_NUMBER() over(partition by stand.newXSDID order by summ.db_Create_Date)
 	from #allDocs_withSummary summ
 			left join #standardize_xsdid stand on stand.SDID = summ.SDID
@@ -1822,15 +1822,15 @@ drop table if exists #RestofFormData
 	select 
 		PID, newXSDID, 
 
-		max(case when R_num = 1 then KPHCSentToER end) KPHCSentToER_1,
-		max(case when R_num = 2 then KPHCSentToER end) KPHCSentToER_2,
-		max(case when R_num = 3 then KPHCSentToER end) KPHCSentToER_3,
-		max(case when R_num = 4 then KPHCSentToER end) KPHCSentToER_4,
-		max(case when R_num = 5 then KPHCSentToER end) KPHCSentToER_5,
-		max(case when R_num = 6 then KPHCSentToER end) KPHCSentToER_6,
-		max(case when R_num = 7 then KPHCSentToER end) KPHCSentToER_7,
-		max(case when R_num = 8 then KPHCSentToER end) KPHCSentToER_8,
-		max(case when R_num = 9 then KPHCSentToER end) KPHCSentToER_9,
+		max(case when R_num = 1 then CpsSentToER end) CpsSentToER_1,
+		max(case when R_num = 2 then CpsSentToER end) CpsSentToER_2,
+		max(case when R_num = 3 then CpsSentToER end) CpsSentToER_3,
+		max(case when R_num = 4 then CpsSentToER end) CpsSentToER_4,
+		max(case when R_num = 5 then CpsSentToER end) CpsSentToER_5,
+		max(case when R_num = 6 then CpsSentToER end) CpsSentToER_6,
+		max(case when R_num = 7 then CpsSentToER end) CpsSentToER_7,
+		max(case when R_num = 8 then CpsSentToER end) CpsSentToER_8,
+		max(case when R_num = 9 then CpsSentToER end) CpsSentToER_9,
 
 		max(case when R_num = 1 then ApptScheduled end) ApptScheduled_1,
 		max(case when R_num = 2 then ApptScheduled end) ApptScheduled_2,
@@ -1857,16 +1857,16 @@ drop table if exists #RestofFormData
 	select
 		PID, newXSDID,
 		case 
-			when KPHCSentToER_9 is not null then KPHCSentToER_9
-			when KPHCSentToER_8 is not null then KPHCSentToER_8
-			when KPHCSentToER_7 is not null then KPHCSentToER_7
-			when KPHCSentToER_6 is not null then KPHCSentToER_6
-			when KPHCSentToER_5 is not null then KPHCSentToER_5
-			when KPHCSentToER_4 is not null then KPHCSentToER_4
-			when KPHCSentToER_3 is not null then KPHCSentToER_3
-			when KPHCSentToER_2 is not null then KPHCSentToER_2
-			when KPHCSentToER_1 is not null then KPHCSentToER_1
-		end KPHCSentToER, 
+			when CpsSentToER_9 is not null then CpsSentToER_9
+			when CpsSentToER_8 is not null then CpsSentToER_8
+			when CpsSentToER_7 is not null then CpsSentToER_7
+			when CpsSentToER_6 is not null then CpsSentToER_6
+			when CpsSentToER_5 is not null then CpsSentToER_5
+			when CpsSentToER_4 is not null then CpsSentToER_4
+			when CpsSentToER_3 is not null then CpsSentToER_3
+			when CpsSentToER_2 is not null then CpsSentToER_2
+			when CpsSentToER_1 is not null then CpsSentToER_1
+		end CpsSentToER, 
 
 		case 
 			when ApptScheduled_9 is not null then ApptScheduled_9
@@ -2130,7 +2130,7 @@ select
 	FirstAttempt, SecondAttempt, ThirdAttempt, FourthAttempt,
 	FifthAttempt, SixthAttempt, SeventhAttempt, LetterAttempt,
 	Q1, Q2, Q3, Q4,
-	Q4_Y_KPHC_to_ER, Q4_Y_Phone_busy, Q4_Y_No_Answer, Q4_Y_No_call_back, Q4_Y_NoAppt, Q4_Y_Other,
+	Q4_Y_Cps_to_ER, Q4_Y_Phone_busy, Q4_Y_No_Answer, Q4_Y_No_call_back, Q4_Y_NoAppt, Q4_Y_Other,
 	Q4_N_Clinic_Closed, Q4_N_No_Phone, Q4_N_Forgot, Q4_N_Language, Q4_N_Other,
 	Q5,
 	es.Education, EducationHoursOfOperation, EducationAfterHours, EducationPhysicianExch,
@@ -2139,7 +2139,7 @@ select
 	No_Appt_Refused, No_Appt_NoContact, No_Appt_NoPhone, No_Appt_PhoneDisconnected, 
 	No_Appt_PhoneBusy, No_Appt_NoAnswer, No_Appt_WrongNumber, No_Appt_LeftMessage,
 	No_Appt_Other,
-	ApptScheduled [ApptScheduledinForm], ApptDateInForm, KPHCSentToER,
+	ApptScheduled [ApptScheduledinForm], ApptDateInForm, CpsSentToER,
 	ApptDate [ApptDateInCPS], ApptProv, 
 	FutureApptDate, FutureProv, 
 	No_Show_Count,
@@ -2174,14 +2174,14 @@ ignored
 		[PID], [PatientID], [newXSDID], [CCDA], [ApptFacility], [AdmitDate], [DischargeDate], 
 		[AdmitDx], [ER], [ER_Hosp_Name], [FirstAttempt], [SecondAttempt], [ThirdAttempt], 
 		[FourthAttempt], [FifthAttempt], [SixthAttempt], [SeventhAttempt], [LetterAttempt], 
-		[Q1], [Q2], [Q3], [Q4], [Q4_Y_KPHC_to_ER], [Q4_Y_Phone_Busy], [Q4_Y_No_Answer], 
+		[Q1], [Q2], [Q3], [Q4], [Q4_Y_Cps_to_ER], [Q4_Y_Phone_Busy], [Q4_Y_No_Answer], 
 		[Q4_Y_No_Call_Back], [Q4_Y_NoAppt], [Q4_Y_Other], [Q4_N_Clinic_Closed], [Q4_N_No_Phone], 
 		[Q4_N_Forgot], [Q4_N_Language], [Q4_N_Other], [Q5], [Education], [EducationHoursOfOperation], 
 		[EducationAfterHours], [EducationPhysicianExch], [EducationNurseAdvice], [EducationPCPFollowUp], 
 		[EducationSameDay], [EducationMedication], [EducationAppropriateER], [EducationOther], 
 		[No_Appt_Refused], [No_Appt_NoContact], [No_Appt_NoPhone], [No_Appt_PhoneDisconnected], 
 		[No_Appt_PhoneBusy], [No_Appt_NoAnswer], [No_Appt_WrongNumber], [No_Appt_LeftMessage], 
-		[No_Appt_Other], [ApptScheduledinForm], [ApptDateInForm], [KPHCSentToER], [ApptDateInCPS], 
+		[No_Appt_Other], [ApptScheduledinForm], [ApptDateInForm], [CpsSentToER], [ApptDateInCPS], 
 		[ApptProv], [FutureApptDate], [FutureProv], [No_Show_Count], [First_Contact_Attempt_Range], 
 		[Actual_Qualified_Appt_Range] 
 
@@ -2190,14 +2190,14 @@ ignored
 		[PID], [PatientID], [newXSDID], [CCDA], [ApptFacility], [AdmitDate], [DischargeDate], 
 		[AdmitDx], [ER], [ER_Hosp_Name], [FirstAttempt], [SecondAttempt], [ThirdAttempt], 
 		[FourthAttempt], [FifthAttempt], [SixthAttempt], [SeventhAttempt], [LetterAttempt], 
-		[Q1], [Q2], [Q3], [Q4], [Q4_Y_KPHC_to_ER], [Q4_Y_Phone_Busy], [Q4_Y_No_Answer], 
+		[Q1], [Q2], [Q3], [Q4], [Q4_Y_Cps_to_ER], [Q4_Y_Phone_Busy], [Q4_Y_No_Answer], 
 		[Q4_Y_No_Call_Back], [Q4_Y_NoAppt], [Q4_Y_Other], [Q4_N_Clinic_Closed], [Q4_N_No_Phone], 
 		[Q4_N_Forgot], [Q4_N_Language], [Q4_N_Other], [Q5], [Education], [EducationHoursOfOperation], 
 		[EducationAfterHours], [EducationPhysicianExch], [EducationNurseAdvice], [EducationPCPFollowUp], 
 		[EducationSameDay], [EducationMedication], [EducationAppropriateER], [EducationOther], 
 		[No_Appt_Refused], [No_Appt_NoContact], [No_Appt_NoPhone], [No_Appt_PhoneDisconnected], 
 		[No_Appt_PhoneBusy], [No_Appt_NoAnswer], [No_Appt_WrongNumber], [No_Appt_LeftMessage], 
-		[No_Appt_Other], [ApptScheduledinForm], [ApptDateInForm], [KPHCSentToER], [ApptDateInCPS], 
+		[No_Appt_Other], [ApptScheduledinForm], [ApptDateInForm], [CpsSentToER], [ApptDateInCPS], 
 		[ApptProv], [FutureApptDate], [FutureProv], [No_Show_Count], [First_Contact_Attempt_Range], 
 		[Actual_Qualified_Appt_Range] 
 	from #combine;

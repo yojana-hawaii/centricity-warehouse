@@ -37,7 +37,7 @@ begin
 		RowNumFirstEntry = ROW_NUMBER() over(partition by patientid, RxSRXID,LocationId order by shotdate desc)
 
 	into #allVaccines-- select top 10 *
-	FROM cpssql.[SRX_KPHC].[dbo].[Shot] s
+	FROM cpssql.[SRX_Cps].[dbo].[Shot] s
 	where RxSRXID not in ('TESTMED','TESTVAC')
 		and convert(date, s.shotdate) >= @CutoffDate;
 

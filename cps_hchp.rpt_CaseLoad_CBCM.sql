@@ -10,7 +10,7 @@ begin
 
 	select 
 		c.CBCM,c.Last, c.First, c.Name, c.PatientID, c.DoB, c.Last_CBCM_Enroll_Date, c.Valid_CBCM_Discharge_Date,
-		c.Last_Housing_Status, Last_Housed_date,Last_KPHC_Consent,
+		c.Last_Housing_Status, Last_Housed_date,Last_Cps_Consent,
 		c.Address1, c.Address2, c.City, c.Zip, c.Phone1, c.Phone2, c.Phone3, c.PrimaryInsurance, c.SecondaryInsurance,
 		c.Last_Cbcm_1157Eval_Date, c.Sec_Last_Cbcm_1157Eval_Date,
 		c.Last_Cbcm_Assessment_Date, c.Sec_Last_Cbcm_Assessment_Date, 

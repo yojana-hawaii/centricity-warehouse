@@ -132,17 +132,5 @@ values
 
 
 
---
-/*
-bulk insert cps_cc.Covid_Vaccine_Supplier
-from '\\kphc-srvfs01\admin\COVID 19 Shared document\COVID TRACK\Covid_Vaccine\Covid_Vaccine_Supplier.csv'
-with
-(
-	FieldTerminator = ',',
-	RowTerminator = '\n',
-	firstrow = 2
-);
-*/
-end
 
 go

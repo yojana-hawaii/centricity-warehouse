@@ -81,7 +81,7 @@ create table cps_hchp.HCHP_Dashboard(
 	[Path_Enrollment] date null, 
 	[MoveIn_Date] date null, 
 	[MoveOut_Date] date null, 
-	[KPHC_Consent] date null, 
+	[Cps_Consent] date null, 
 	[CBCM_DSP_Data] smallint null, 
 	[HF_DSP_Data]  smallint null, 
 	[Outreach_DSP_Data] smallint null, 
@@ -184,7 +184,7 @@ begin
 		or ([Path_Enrollment] is not null and isdate([Path_Enrollment]) = 0)
 		or ([MoveIn_Date] is not null and isdate([MoveIn_Date]) = 0)
 		or ([MoveOut_Date] is not null and isdate([MoveOut_Date]) = 0)
-		or ([KPHC_Consent] is not null and isdate([KPHC_Consent]) = 0)
+		or ([Cps_Consent] is not null and isdate([Cps_Consent]) = 0)
 
 		or ([CBCM_UnableToLocate_Date] is not null and isdate([CBCM_UnableToLocate_Date]) = 0)
 		or ([SOAR_Date] is not null and isdate([SOAR_Date]) = 0)
@@ -223,7 +223,7 @@ begin
 		[HMIS_Assessment_CBCM], [HMIS_Assessment_HF], [HMIS_Assessment_Outreach], [HMIS_Assessment_PSH], 
 		[BHA_signed_by_Q], [LOCUS_signed_by_Q], [ITP_signed_by_Q], 
 		[VISPDAT_with_client], [VISPDAT_to_PHOCUSED], [Path_Enrollment], 
-		[MoveIn_Date], [MoveOut_Date], [KPHC_Consent], 
+		[MoveIn_Date], [MoveOut_Date], [Cps_Consent], 
 		[CBCM_DSP_Data], [HF_DSP_Data], [Outreach_DSP_Data], [PSH_DSP_Data], 
 		[CBCM_DSP_Assess], [HF_DSP_Assess], [Outreach_DSP_Assess], [PSH_DSP_Assess], 
 		[CBCM_DSP_Plan], [HF_DSP_Plan], [Outreach_DSP_Plan], [PSH_DSP_Plan], 
@@ -252,7 +252,7 @@ begin
 		case when isdate([LOCUS_signed_by_Q]) = 1 then [LOCUS_signed_by_Q] end, 
 		[ITP_signed_by_Q], 
 		[VISPDAT_with_client], [VISPDAT_to_PHOCUSED], [Path_Enrollment], 
-		[MoveIn_Date], [MoveOut_Date], [KPHC_Consent],  
+		[MoveIn_Date], [MoveOut_Date], [Cps_Consent],  
 		
 		case when [CBCM_DSP_Data] is not null then 1 else 0 end [CBCM_DSP_Data], 
 		case when [HF_DSP_Data] is not null then 1 else 0 end [HF_DSP_Data], 

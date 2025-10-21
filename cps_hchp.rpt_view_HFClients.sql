@@ -27,7 +27,7 @@ as
 		  ,[Last_housing_location]
 		  ,[Last_Housing_Program]
 		  ,[Last_Housing_Status]
-		  , Last_KPHC_Consent
+		  , Last_Cps_Consent
 		  ,[PatientID]
 		  ,[Last]
 		  ,[First]

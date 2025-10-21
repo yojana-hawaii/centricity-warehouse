@@ -15,7 +15,7 @@ begin
 		h.Last_Outreach_Assessment_Date, h.Sec_Last_Outreach_Assessment_Date,
 		h.Last_Outreach_Treatment_Date, h.Sec_Last_Outreach_Treatment_Date,
 		h.Last_Outreach_Intake_date,  h.Sec_Last_Outreach_Intake_date, h.Last_VISPDAT_Submitted, h.Last_Path_Enrollment_Date, 
-		h.Last_Outreach_HMIS_Assessment_Completed_Date, h.Last_Outreach_HMIS_Consent_Signed_Date, h.Last_KPHC_Consent
+		h.Last_Outreach_HMIS_Assessment_Completed_Date, h.Last_Outreach_HMIS_Consent_Signed_Date, h.Last_Cps_Consent
 	from cps_hchp.rpt_view_OutreachClients h
 
 end

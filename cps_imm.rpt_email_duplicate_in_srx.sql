@@ -12,7 +12,7 @@ begin
 		pp.name,s.patientid PatientID, lotno LotNo, rxname RxName, RxSRXID barcode, 
 		convert(date, shotdate) admindate,spusername SpUsername, count(*) total
 	into #duplicates
-	FROM cpssql.[SRX_KPHC].[dbo].[Shot] s
+	FROM cpssql.[SRX_Cps].[dbo].[Shot] s
 		left join cps_all.PatientProfile pp on pp.PatientID = s.patientid
 	where s.shotdate >= '2022-07-01'-- convert(date, getdate() )
 		and pp.TestPatient = 0
@@ -22,7 +22,7 @@ begin
 	drop table if exists #dups_with_date;
 	;with v as (
 		select eDate eDate, UserID UserID, ReqString Reqstring
-		from cpssql.[SRX_KPHC].[dbo].WSLOG
+		from cpssql.[SRX_Cps].[dbo].WSLOG
 		where reqstring like '%"query":"false"%'
 	)
 		select 

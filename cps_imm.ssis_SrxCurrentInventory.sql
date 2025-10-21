@@ -77,21 +77,21 @@ begin
 	from 
 		(
 			select  [RxSRXID] [RxSRXID],[qty],[tran_typeid] [tran_typeid],[location] [Location]
-			from cpssql.[SRX_KPHC].[dbo].[Inventory_transection]
+			from cpssql.[SRX_Cps].[dbo].[Inventory_transection]
 			where RxSRXID not in ('TESTMED','TESTVAC')
 		) q
 		pivot (
 			sum(qty)
 			for [tran_typeid] in ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10])
 		) pvt
-			left join cpssql.[SRX_KPHC].[dbo].InventoryMaster i on i.RxSRXID = pvt.RxSRXID and i.location = pvt.location
-			--left join cpssql.[SRX_KPHC].[dbo].[RxHistory] rx on rx.RxSRXID = pvt.RxSRXID
+			left join cpssql.[SRX_Cps].[dbo].InventoryMaster i on i.RxSRXID = pvt.RxSRXID and i.location = pvt.location
+			--left join cpssql.[SRX_Cps].[dbo].[RxHistory] rx on rx.RxSRXID = pvt.RxSRXID
 			left join (
 				select * from
 				(
 					select rowNum = ROW_NUMBER() over(partition by RxSRXID order by EditedDate desc), 
 					RXSRXID RXSRXID, NDCCode NDCCode,lotNo lotNo, rxName RxName, SourceRcv SourceRcv
-					from cpssql.[SRX_KPHC].[dbo].[RxHistory]
+					from cpssql.[SRX_Cps].[dbo].[RxHistory]
 				) lastChaged
 				where rowNum = 1
 			) rx on rx.RxSRXID = pvt.RxSRXID
@@ -100,7 +100,7 @@ begin
 					[RxSRXID],LocationID,-- RxName, NDCCode, LotNo,   
 					round(sum(convert(float, dose)),2)*-1 TotalDoseAdministered_ShotTable,
 					count(*)*-1 TotalCount_ShotTable
-				from cpssql.[SRX_KPHC].[dbo].shot
+				from cpssql.[SRX_Cps].[dbo].shot
 				group by [RxSRXID], LocationID--, RxName, NDCCode, LotNo
 			) s on s.RxSRXID = pvt.RxSRXID and s.LocationID = pvt.location
 

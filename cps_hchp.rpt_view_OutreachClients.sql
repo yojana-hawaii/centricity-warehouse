@@ -26,7 +26,7 @@ as
 		  ,[Last_Housing_Status]
 		  ,Last_Outreach_HMIS_Assessment_Completed_Date
 		  ,Last_Outreach_HMIS_Consent_Signed_Date
-		  ,Last_KPHC_Consent
+		  ,Last_Cps_Consent
 		  ,[PatientID]
 		  ,[Last]
 		  ,[First]

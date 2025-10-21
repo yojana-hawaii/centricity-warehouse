@@ -39,7 +39,7 @@ with u as (
 	from cpssql.CentricityPS.dbo.MedAdminRequest req
 		left join cpssql.CentricityPS.dbo.MedAdministration med on med.MedAdminRequestID = req.MedAdminRequestID
 		left join cps_all.PatientProfile pp on pp.pid = req.PID
-	where req.CustomListName = 'KPHC Diagnostics'
+	where req.CustomListName = 'Diagnostics'
 		and req.FiledInError = 'N'
 		and med.Inactive = 'N'
 )

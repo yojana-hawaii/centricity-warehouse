@@ -73,7 +73,7 @@ create table cps_hchp.HCHP_LastClientStatus(
 	Last_Path_Enrollment_Date date null,
 	Last_Outreach_HMIS_Consent_Signed_Date date null,
 	Last_Outreach_HMIS_Assessment_Completed_Date date null,
-	Last_KPHC_Consent date null,
+	Last_Cps_Consent date null,
 	Last_BHA_signed_by_Q date null, 
 	Last_ITP_signed_by_Q date null, 
 	Last_LOCUS_signed_by_Q date null
@@ -456,16 +456,16 @@ begin
 	) x
 	where x.RowNum = 1;	
 
-	drop table if exists #last_KPHC_consent;
+	drop table if exists #Last_Cps_Consent;
 	select * 
-	into #last_KPHC_consent
+	into #Last_Cps_Consent
 	from (
 		select 
-			PID, ObsDate, KPHC_Consent Last_KPHC_Consent,
+			PID, ObsDate, Cps_Consent Last_Cps_Consent,
 			RowNum = ROW_NUMBER() over(partition by pid order by obsdate desc)
 		from cps_hchp.HCHP_Dashboard h
 		where 
-			h.KPHC_Consent is not null
+			h.Cps_Consent is not null
 			
 	) x
 	where x.RowNum = 1;	
@@ -512,7 +512,7 @@ begin
 				Last_HF_Locus_Level, Last_HF_Locus_Recommendation, Last_HF_Locus_Score,
 				Last_CBCM_Locus_Level, Last_CBCM_Locus_Recommendation, Last_CBCM_Locus_Score,
 				Last_VISPDAT_Submitted, Last_Path_Enrollment_Date, Last_Outreach_HMIS_Consent_Signed_Date, Last_Outreach_HMIS_Assessment_Completed_Date,
-				Last_KPHC_Consent,
+				Last_Cps_Consent,
 
 				Last_BHA_signed_by_Q, Last_ITP_signed_by_Q, Last_LOCUS_signed_by_Q
 		)
@@ -553,7 +553,7 @@ begin
 				Last_HF_Locus_Level, Last_HF_Locus_Recommendation, Last_HF_Locus_Score,
 				Last_CBCM_Locus_Level, Last_CBCM_Locus_Recommendation, Last_CBCM_Locus_Score,
 				Last_VISPDAT_Submitted, Last_Path_Enrollment_Date, 
-				hm_con.Last_HMIS_Consent_SignedOutreach_Date, hm_ass.Last_HMIS_Assessment_Outreach_Date, kp.Last_KPHC_Consent,
+				hm_con.Last_HMIS_Consent_SignedOutreach_Date, hm_ass.Last_HMIS_Assessment_Outreach_Date, kp.Last_Cps_Consent,
 
 				d.Last_BHA_signed_by_Q, d.Last_ITP_signed_by_Q, d.Last_LOCUS_signed_by_Q
 			from #hchp_program d
@@ -567,7 +567,7 @@ begin
 				left join #Last_path_enrolled_date pa on pa.pid = d.PID
 				left join #last_outreach_hmis_assessment hm_ass on hm_ass.PID = d.PID
 				left join #last_outreach_hmis_consent hm_con on hm_con.PID = d.PID
-				left join #last_KPHC_consent kp on kp.PID  = d.PID
+				left join #Last_Cps_Consent kp on kp.PID  = d.PID
 	
 	
 end

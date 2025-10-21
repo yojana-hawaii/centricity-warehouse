@@ -66,7 +66,7 @@ begin
 		s.NDCCode NDC10_Srx, fxn.ConvertNdc10ToNdc11(s.NDCCode) NDC11_Converted, s.RXName RXName_srx, s.LotNo LotNo_srx
 		, count(*) Total_srx
 	into #srx_data
-	FROM cpssql.[SRX_KPHC].[dbo].[Shot] s
+	FROM cpssql.[SRX_Cps].[dbo].[Shot] s
 		left join dbo.dimDate d on d.date = convert(date,s.shotdate)
 	where convert(date,s.shotDate) >= @StartDate
 		and convert(date,s.shotDate) < @EndDate
@@ -78,7 +78,7 @@ begin
 		s.NDCCode NDC10_Srx, fxn.ConvertNdc10ToNdc11(s.NDCCode) NDC11_Converted, s.RXName RXName_srx, s.LotNo LotNo_srx, LocationID LocationID_srx
 		, count(*) Total_srx
 	into #srx_data_facility
-	FROM cpssql.[SRX_KPHC].[dbo].[Shot] s
+	FROM cpssql.[SRX_Cps].[dbo].[Shot] s
 		left join dbo.dimDate d on d.date = convert(date,s.shotdate)
 	where convert(date,s.shotDate) >= @StartDate
 		and convert(date,s.shotDate) < @EndDate
