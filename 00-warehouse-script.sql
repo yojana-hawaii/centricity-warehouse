@@ -14,16 +14,21 @@ Turn on sqlCmd Mode --> Query --> sqlCmd Mode
 */
 
 /******************dbo path******************/
-print('start')
+print('Message: Script start')
 :setvar path_main c:\CpsWarehouse
 
 
 GO
-/*create database - 4*/
+/*not counted here 
+this script file - 1
+import csv - 2 
+*/
+/*create database - 5*/
 :r $(path_main)\01_create_database.sql
 :r $(path_main)\02_create_schema.sql
 :r $(path_main)\dbo.dimDates.sql
 :r $(path_main)\dbo.Numbers.sql
+:r $(path_main)\dbo.zipcodes.sql
 print('Message: Database Created, schema added, dates and number dimension added')
 
 /*functions > 2 + 6 + 3 + 5 + 2 = 18*/
@@ -220,8 +225,8 @@ print('Message: 1 cps_diag created')
 :r $(path_main)\cps_imm.ssis_ImmunizationWithCombo.sql
 :r $(path_main)\cps_imm.ssis_Immunization_Combo.sql
 
---:r $(path_main)\cps_imm.ssis_SrxCurrentInventory.sql
---:r $(path_main)\cps_imm.ssis_SrxDuplicateInventory.sql
+:r $(path_main)\cps_imm.ssis_SrxCurrentInventory.sql
+:r $(path_main)\cps_imm.ssis_SrxDuplicateInventory.sql
 
 :r $(path_main)\cps_imm.view_FullyVaccineStatus.sql
 
@@ -230,12 +235,12 @@ print('Message: 1 cps_diag created')
 :r $(path_main)\cps_imm.rpt_DistinctVaccineGroup.sql
 :r $(path_main)\cps_imm.rpt_ImmunizationAggByFacility.sql
 :r $(path_main)\cps_imm.rpt_ImmunizationAggByProvider.sql
---:r $(path_main)\cps_imm.rpt_email_duplicate_in_srx.sql
---:r $(path_main)\cps_imm.rpt_Immunization_PositiveInventory.sql
---:r $(path_main)\cps_imm.rpt_Immunization_testPatient_Srx.sql
---:r $(path_main)\cps_imm.rpt_Immunization_ZeroInventory.sql
+:r $(path_main)\cps_imm.rpt_email_duplicate_in_srx.sql
+:r $(path_main)\cps_imm.rpt_Immunization_PositiveInventory.sql
+:r $(path_main)\cps_imm.rpt_Immunization_testPatient_Srx.sql
+:r $(path_main)\cps_imm.rpt_Immunization_ZeroInventory.sql
 
---:r $(path_main)\cps_imm.rpt_Immnization_CpsSrxQA.sql
+:r $(path_main)\cps_imm.rpt_Immnization_CpsSrxQA.sql
 print('Message: 17 cps_imm  created')
 GO
 
@@ -271,7 +276,7 @@ GO
 print('Message: 22 cps_cc Created')
 GO
 
-/*cps_hchp > 1 + 3 + 2 + 5 + 1 + 5 + 5 + 5 + 3 = 30*/
+/*cps_hchp > 1 + 3 + 2 + 5 + 1 + 5 + 5 + 5 + 3 + 2 = 32*/
 :r $(path_main)\cps_hchp.tmp_view_HCHPClients.sql
 
 :r $(path_main)\cps_hchp.ssis_HCHP_Dashboard.sql
@@ -313,7 +318,9 @@ GO
 :r $(path_main)\cps_hchp.rpt_CaseManagerList.sql
 :r $(path_main)\cps_hchp.rpt_CBCMLastDates.sql
 
-print('Message: 30 cps_hchp Created')
+:r $(path_main)\cps_hchp.rpt_SPC_Match_PatientId.sql
+:r $(path_main)\cps_hchp.rpt_SPC_Match_HCHPDashboard.sql
+print('Message: 32 cps_hchp Created')
 GO
 
 /*opt > 2*/
@@ -340,6 +347,43 @@ print('Message: 2 cps_opt Created')
 :r $(path_main)\cps_doh.rpt_CVR_VisitFile.sql
 print('Message: 12 cps_doh Created')
 
+/*cps-dentrix > 4 + 1 = 4*/
+:r $(path_main)\cps_den.ssis_dentalPatientProfile.sql
+:r $(path_main)\cps_den.ssis_Den_CPS_PatientMatching_Alogrithm.sql
+:r $(path_main)\cps_den.ssis_SlidingFeeCyrca.sql
+
+:r $(path_main)\cps_den.rpt_slidingfee_cyrca.sql
+print('Message: 4 cps_den Created')
+
+/*track > 2 + 3 = 5*/
+:r $(path_main)\cps_track.ssis_breastDiagnosis.sql
+:r $(path_main)\cps_track.ssis_papHPVTracking.sql
+
+:r $(path_main)\cps_track.rpt_SummaryTracking.sql
+:r $(path_main)\cps_track.rpt_MammoTracking.sql
+:r $(path_main)\cps_track.rpt_PapHpvTracking.sql
+print('Message: 5 cps_track Created')
+
+/*ohana > 1 + 6 + 3 + 1 + 3 */
+:r $(path_main)\cps_insurance.ssis_NPIDetails.sql
+
+:r $(path_main)\cps_insurance.tmp_view_OhanaEncounters.sql
+:r $(path_main)\cps_insurance.tmp_view_OhanaMember.sql
+:r $(path_main)\cps_insurance.tmp_view_Ohana_Immunization.sql
+:r $(path_main)\cps_insurance.tmp_view_OhanaAppointments.sql
+:r $(path_main)\cps_insurance.tmp_view_OhanaMedication.sql
+:r $(path_main)\cps_insurance.tmp_view_OhanaProviders.sql
+
+:r $(path_main)\cps_insurance.ssis_Ohana_Services.sql
+:r $(path_main)\cps_insurance.ssis_OhanaCPT_ICD.sql
+:r $(path_main)\cps_insurance.ssis_Ohana_Labs_Referrals.sql
+
+:r $(path_main)\cps_insurance.rpt_view_OhanaFlatFile.sql
+
+:r $(path_main)\cps_insurance.rpt_OhanaProviders_MissingDetails.sql
+:r $(path_main)\cps_insurance.rpt_OhanaProviders.sql
+:r $(path_main)\cps_insurance.rpt_Ohana_FlatFile.sql
+print('Message: 14 cps_insurance Created')
 
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
@@ -355,6 +399,9 @@ print('Message: 12 cps_doh Created')
 :r $(path_main)\dbo.ssis_job_cps_hchp.sql
 :r $(path_main)\dbo.ssis_job_cps_opt.sql
 :r $(path_main)\dbo.ssis_job_cps_doh.sql
+:r $(path_main)\dbo.ssis_job_cps_den.sql
+:r $(path_main)\dbo.ssis_job_cps_track.sql
+:r $(path_main)\dbo.ssis_job_cps_insurance.sql
 print('Message: jobs created')
 
 
@@ -399,6 +446,15 @@ go
 exec cpswarehouse.dbo.ssis_job_cps_doh
 print('Message: doh complete')
 go
-print('Message: Schema End')
+exec cpswarehouse.dbo.ssis_job_cps_den
+print('den complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_track
+print('track complete')
+go
+exec cpswarehouse.dbo.ssis_job_cps_insurance
+print('den complete')
+go
+print('Message: script end')
 go
 

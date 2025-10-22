@@ -16,7 +16,7 @@ create proc cps_cc.rpt_protocols
 as 
 begin
 
-	--declare @apptDate date = convert(date, getdate()), @pvid_str varchar(20) = '1536148802000010';/*Dr. Rediger*/
+	--declare @apptDate date = convert(date, getdate()), @pvid_str varchar(20) = '1536148802000010';/*Dr. Y*/
 
 
 	declare @pvid numeric(19,0) = convert( numeric(19,0), @pvid_str)

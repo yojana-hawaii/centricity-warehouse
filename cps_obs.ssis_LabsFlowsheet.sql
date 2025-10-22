@@ -19,7 +19,7 @@ create table cps_obs.LabsFlowsheet(
 	[Mammogram] varchar(2000) null, 
 	[Pap Smear] varchar(2000) null, 
 	[Fundus in Optometry] varchar(2000) null, 
-	[Diab Retinal Exam Dr. yang] varchar(2000) null, 
+	[Diab Retinal Exam] varchar(2000) null, 
 	[Diab Eye Exam Scanned] varchar(2000) null, 
 	[Bone Dexa] varchar(2000) null, 
 	[Dexa Left Hip] varchar(2000) null, 
@@ -59,14 +59,14 @@ begin
 		PID, SDID, XID, PatientID,ObsDate,[HGBA1C], [LDL], 
 		[Lead_Screening] , [Albumin/Creatinine Ratio (ACR)], 
 		[Chlamydia], [IFobt], [Colonoscopy], [Mammogram], [Pap Smear], [Fundus in Optometry], 
-		[Diab Retinal Exam Dr. yang], [Diab Eye Exam Scanned], [Bone Dexa], [Dexa Left Hip], 
+		[Diab Retinal Exam], [Diab Eye Exam Scanned], [Bone Dexa], [Dexa Left Hip], 
 		[Dexa Right Hip], [Dexa Spine], [Random BG], [HPV]
 	)
 	select
 		PID, SDID, XID, PatientID,ObsDate,[HGBA1C], [LDL], 
 		[Lead_Screening], [Albumin/Creatinine Ratio (ACR)], 
 		[Chlamydia], [IFobt], [Colonoscopy], [Mammogram], [Pap Smear], [Fundus in Optometry], 
-		[Diab Retinal Exam Dr. yang], [Diab Eye Exam Scanned], [Bone Dexa], [Dexa Left Hip], 
+		[Diab Retinal Exam], [Diab Eye Exam Scanned], [Bone Dexa], [Dexa Left Hip], 
 		[Dexa Right Hip], [Dexa Spine], [Random BG], [HPV]
 	from u
 end
