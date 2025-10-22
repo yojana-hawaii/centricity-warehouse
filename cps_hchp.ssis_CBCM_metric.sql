@@ -48,10 +48,10 @@ as begin
 truncate table cps_hchp.cbcm_metric;
 
 drop table if exists #CBCMClient
-select PID 
+select * 
 into #CBCMClient 
 from  cps_hchp.rpt_view_CBCMClients pp 
-where cbcm = 1
+
 
 
 drop table if exists #cbcmVisitData

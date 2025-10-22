@@ -14,7 +14,8 @@ Turn on sqlCmd Mode --> Query --> sqlCmd Mode
 */
 
 /******************dbo path******************/
-print('Message: Script start')
+print('Message: Script start.')
+print('Message: Not counted > 1 sql CMDscript + 2 csv import + 1 gitignore + 1 proj file = 6')
 :setvar path_main c:\CpsWarehouse
 
 
@@ -29,7 +30,7 @@ import csv - 2
 :r $(path_main)\dbo.dimDates.sql
 :r $(path_main)\dbo.Numbers.sql
 :r $(path_main)\dbo.zipcodes.sql
-print('Message: Database Created, schema added, dates and number dimension added')
+print('Message: 5 Database Created, schema added, dates and number dimension added')
 
 /*functions > 2 + 6 + 3 + 5 + 2 = 18*/
 :r $(path_main)\fxn.ClinicalDateToDate.sql
@@ -355,16 +356,29 @@ print('Message: 12 cps_doh Created')
 :r $(path_main)\cps_den.rpt_slidingfee_cyrca.sql
 print('Message: 4 cps_den Created')
 
-/*track > 2 + 3 = 5*/
+/*track > 3 + 3 + 7 + 3 = 16*/
 :r $(path_main)\cps_track.ssis_breastDiagnosis.sql
 :r $(path_main)\cps_track.ssis_papHPVTracking.sql
+:r $(path_main)\cps_track.ssis_patientPortalSignup.sql
 
 :r $(path_main)\cps_track.rpt_SummaryTracking.sql
 :r $(path_main)\cps_track.rpt_MammoTracking.sql
 :r $(path_main)\cps_track.rpt_PapHpvTracking.sql
-print('Message: 5 cps_track Created')
 
-/*ohana > 1 + 6 + 3 + 1 + 3 */
+:r $(path_main)\cps_track.Billing_ticket_questions.sql
+:r $(path_main)\cps_track.Medicaid_Weekly_Breakdown.sql
+:r $(path_main)\cps_track.Yearly_Productivity_By_Site.sql
+:r $(path_main)\cps_track.Yearly_Productivity_Report.sql
+:r $(path_main)\cps_track.Yearly_Telehealth_By_Month.sql
+:r $(path_main)\cps_track.Yearly_Telehealth_By_Site.sql
+:r $(path_main)\cps_track.Yearly_Telehealth_Details.sql
+
+:r $(path_main)\cps_track.rpt_aapcho_enabling_service.sql
+:r $(path_main)\cps_track.rpt_patient_with_er.sql
+:r $(path_main)\cps_track.rpt_ProviderProductivityOverTheYears.sql
+print('Message: 13 cps_track Created')
+
+/*ohana > 1 + 6 + 3 + 1 + 3 + 7 = 21 */
 :r $(path_main)\cps_insurance.ssis_NPIDetails.sql
 
 :r $(path_main)\cps_insurance.tmp_view_OhanaEncounters.sql
@@ -383,7 +397,15 @@ print('Message: 5 cps_track Created')
 :r $(path_main)\cps_insurance.rpt_OhanaProviders_MissingDetails.sql
 :r $(path_main)\cps_insurance.rpt_OhanaProviders.sql
 :r $(path_main)\cps_insurance.rpt_Ohana_FlatFile.sql
-print('Message: 14 cps_insurance Created')
+
+:r $(path_main)\cps_insurance.rpt_appointment_summary_byInsurance.sql
+:r $(path_main)\cps_insurance.rpt_ElectronicIinsuranceVerification.sql
+:r $(path_main)\cps_insurance.rpt_Two_Year_Immunization.sql
+:r $(path_main)\cps_insurance.rpt_UHC_CCD_DM.sql
+:r $(path_main)\cps_insurance.rpt_VisitType_By_Insurance.sql
+:r $(path_main)\cps_insurance.rpt_well_child_15_months.sql
+:r $(path_main)\cps_insurance.rpt_well_child_30_months.sql
+print('Message: 21 cps_insurance Created')
 
 /*ssis job*/
 :r $(path_main)\dbo.ssis_job_cps_all.sql
@@ -402,7 +424,7 @@ print('Message: 14 cps_insurance Created')
 :r $(path_main)\dbo.ssis_job_cps_den.sql
 :r $(path_main)\dbo.ssis_job_cps_track.sql
 :r $(path_main)\dbo.ssis_job_cps_insurance.sql
-print('Message: jobs created')
+print('Message: 16 jobs created')
 
 
 /*run ssis*/
@@ -453,8 +475,26 @@ exec cpswarehouse.dbo.ssis_job_cps_track
 print('track complete')
 go
 exec cpswarehouse.dbo.ssis_job_cps_insurance
-print('den complete')
-go
-print('Message: script end')
+print('insurance complete')
 go
 
+
+/*incomplete script > might be useful
+zz.carf-bh-referral-appt-scheduled.sql
+zz.cdc-yearly-data.sql
+zz.cdc-yearly-report-outside-org-script.sql
+zz.cycle-time.sql
+zz.meds-ordered.sql
+zz.nachc-average-appointments-per-specialty-per-week.sql
+zz.pharmacy-audit-internal-meds.sql
+zz.useful-diagnosis-tables.sql
+zz.well-app-success.sql
+zz.UDS-HIV.sql
+zz.vaccine-by-race-age-insurance.sql
+*/
+
+
+
+
+print('Message: script end')
+go
