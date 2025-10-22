@@ -7,9 +7,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-drop proc if exists cps_hchp.rpt_SPC_Match_Kohou_PatientID
+drop proc if exists cps_hchp.rpt_SPC_Match_PatientID
 go
-create proc cps_hchp.rpt_SPC_Match_Kohou_PatientID
+create proc cps_hchp.rpt_SPC_Match_PatientID
 (
 	@patientID nvarchar(max),
 	@StartDate date,
